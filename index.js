@@ -1,10 +1,16 @@
 const PADDING = (window.outerWidth / 100);
+const WIN = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+
+var xPosition = [];
+var oPosition = [];
+
 var TURN = 'X';
 var c = new fabric.Canvas('canvas', {
   width: window.innerWidth - 2 * PADDING,
   height: window.innerHeight - 2 * PADDING,
   selectable: false
 });
+
 let boardProps = {
   stroke: 'white',
   fill: '',
@@ -78,9 +84,8 @@ let lineH2 = new fabric.Line([
 
 c.add(lineV1, lineV2, lineH1, lineH2);
 
-
 c.on('mouse:down', (evt) => {
-  
+
   let clickedRect = rectangles.filter((rectangle) => {
     if (rectangle.id === evt.target.id && !evt.target.occupied) {
       return true
@@ -94,23 +99,33 @@ c.on('mouse:down', (evt) => {
   var text = new fabric.Text(turnText, {
     left: clickedRect.left + clickedRect.width / 2,
     top: clickedRect.top + clickedRect.height / 2,
-    fill: 'white',
-    fontSize:clickedRect.width / 2,
-    fontFamily:'Raleway',
-    fontWeight:100,
-    selectable:false,
-    originX:'center',
-    originY:'center'
+    fill: 'pink',
+    fontSize: clickedRect.width / 2,
+    fontFamily: 'Raleway',
+    fontWeight: 100,
+    selectable: false,
+    originX: 'center',
+    originY: 'center'
   });
 
-  TURN = TURN==='X' ? 'O' : 'X';
+  TURN = TURN === 'X'
+    ? 'O'
+    : 'X';
 
-  rectangles.map((rectangle)=>{
-    if(rectangle.id===clickedRect.id){
+  rectangles.map((rectangle) => {
+    if (rectangle.id === clickedRect.id) {
       rectangle.occupied = !rectangle.occupied;
     }
     return rectangle;
   })
+
+  text.animate('fontSize', clickedRect.width / 1.87, {
+    onChange: c
+      .renderAll
+      .bind(c),
+    duration: 400,
+    oncomplete:c.renderAll()
+  });
 
   c.add(text);
 })

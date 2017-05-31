@@ -1,5 +1,5 @@
 {
-  "dependencies": {
+  "dev-dependencies": {
     "babelify": "^7.3.0",
     "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
