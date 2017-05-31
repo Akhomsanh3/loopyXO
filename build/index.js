@@ -45,7 +45,7 @@ for (let i = 0; i < 3; i++) {
       fill: '',
       stroke: 'black',
       selectable: false,
-      id: "rect" + (count++).toString(),
+      id:(count++).toString(),
       occupied:false
     });
     rectangles.push(temp);
@@ -128,8 +128,34 @@ c.on('mouse:down', (evt) => {
   });
 
   c.add(text);
+
+  // Check if the game is over
+
+  xPosition.push(clickedRect.id);
+
+  WIN.some((winH)=>{
+    let hypothesis = divideThemInChunks(xPosition);
+    console.log(hypothesis);
+    
+    hypothesis.map((hy)=>{
+      return hy.sort();
+    });
+
+    if(_.includes(hypothesis, winH)) return true;
+    else return false; 
+  })
 })
 
+function divideThemInChunks(collection){
+  let chunks = [];
+  
+  let keys = [...Array(collection.length).keys()];
+  
+  keys.forEach((key)=>{
+    let temp = _.pull(collection, collection[key]);
+    chunks.push(temp);
+  })
+}
 
 // fabric.Rect.prototype.animateLine = animateLine; boardV.animateLine('width');
 // boardH.animateLine('height'); function animateLine(prop) {
