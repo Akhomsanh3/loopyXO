@@ -1,20 +1,24 @@
 const PADDING = (window.outerWidth / 100);
+var TURN = 'X';
 var c = new fabric.Canvas('canvas', {
-  width: window.innerWidth - 2 *PADDING,
-  height: window.innerHeight - 2 *PADDING,
+  width: window.innerWidth - 2 * PADDING,
+  height: window.innerHeight - 2 * PADDING,
   selectable: false
 });
 let boardProps = {
   stroke: 'white',
   fill: '',
-  strokeWidth: 5
+  strokeWidth: 5,
+  selectable: false
 };
 
 let progress = new fabric.Line([
   0, 0, canvas.width, 0
-], Object.assign({}, boardProps, {stroke: 'pink'}));
+], Object.assign({}, boardProps, {
+  stroke: 'pink'
+}));
 
-c.add(progress);
+// c.add(progress);
 
 const height = canvas.clientHeight - PADDING;
 const width = canvas.clientWidth - PADDING;
@@ -35,7 +39,8 @@ for (let i = 0; i < 3; i++) {
       fill: '',
       stroke: 'black',
       selectable: false,
-      id: "rect" + (count++).toString()
+      id: "rect" + (count++).toString(),
+      occupied:false
     });
     rectangles.push(temp);
   }
@@ -72,6 +77,44 @@ let lineH2 = new fabric.Line([
 ], boardProps);
 
 c.add(lineV1, lineV2, lineH1, lineH2);
+
+
+c.on('mouse:down', (evt) => {
+  
+  let clickedRect = rectangles.filter((rectangle) => {
+    if (rectangle.id === evt.target.id && !evt.target.occupied) {
+      return true
+    }
+  });
+
+  clickedRect = clickedRect[0];
+
+  let turnText = TURN;
+
+  var text = new fabric.Text(turnText, {
+    left: clickedRect.left + clickedRect.width / 2,
+    top: clickedRect.top + clickedRect.height / 2,
+    fill: 'white',
+    fontSize:clickedRect.width / 2,
+    fontFamily:'Raleway',
+    fontWeight:100,
+    selectable:false,
+    originX:'center',
+    originY:'center'
+  });
+
+  TURN = TURN==='X' ? 'O' : 'X';
+
+  rectangles.map((rectangle)=>{
+    if(rectangle.id===clickedRect.id){
+      rectangle.occupied = !rectangle.occupied;
+    }
+    return rectangle;
+  })
+
+  c.add(text);
+})
+
 
 // fabric.Rect.prototype.animateLine = animateLine; boardV.animateLine('width');
 // boardH.animateLine('height'); function animateLine(prop) {
