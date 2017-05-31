@@ -1,0 +1,25 @@
+{
+  "short_name": "ForeverTTT",
+  "name": "Forever Tic-Tac-Toe",
+  "icons": [
+    {
+      "src": "images/icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "images/icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "images/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "index.html",
+  "orientation":"landscape",
+  "theme_color": "#00bcd4",
+  "display":"fullscreen"
+}

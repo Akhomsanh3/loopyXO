@@ -8,16 +8,29 @@
     <title>Forever TTT</title>
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#00bcd4">
+    <link rel="manifest" href="/manifest.json">
 </head>
 
 <body>
+    <div style="display:flex; flex-direction: column">
+        <div id="progress" width=0 height=0>
 
-    <canvas id="canvas">
+        </div>
+        <header id="scorecard">
+            <p id="xScoreContainer">X: <span class="xScore">0</span></p>
 
-    </canvas>
+            <h2>Forever TTT</h2>
 
-    <script src="fabric.min.js"></script>
-    <script src="lodash.core.min.js"></script>
+            <p id="oScoreContainer">O: <span class="oScore">0</span></p>
+        
+        </header>
+        <canvas id="canvas">
+        </canvas>
+    </div>
+
+
+    <script src="js/fabric.min.js"></script>
+    <script src="js/lodash.min.js"></script>
     <script src="build/index.js"></script>
 </body>
 

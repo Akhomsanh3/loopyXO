@@ -1,9 +1,130 @@
-html,body{
-    margin: 0;
-    padding: 0;
-    background: black;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
-#canvas{
-    padding:1%;
+#canvas {
+  /*background: black;*/
+  flex: 7;
+  padding: 1%;
+}
+
+#scorecard {
+  flex: 0.5;
+  align-self: center;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  font-family: 'Raleway';
+}
+
+#progress {
+  width: 100%;
+  flex: 0.5;
+  border-bottom: 5px solid hotpink;
+  /*animation: reduced 7s ease-in-out infinite;*/
+}
+
+#copyright{
+    display: flex;
+    flex: 2;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#copyright span{
+  padding: 0em 0em;
+  text-align: center;
+  font-family: 'Raleway';
+  font-size: 1em;
+  align-self: center;
+}
+
+@keyframes reduced {
+  to {
+    width: 0px;
+  }
+}
+
+#xScoreContainer,
+#oScoreContainer {
+  flex: 2;
+  align-self: center;
+  font-size: 1.5em;
+  font-weight: 100;
+}
+
+.xScore {
+  color: blue;
+  font-weight:normal;
+  
+}
+
+.oScore {
+  color: hotpink;
+  font-weight: normal;  
+}
+
+#scorecard h2 {
+  flex: 6;
+  font-weight: 100;
+}
+
+
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shake {
+  animation-name: shake;
+}
+
+@keyframes headShake {
+  0% {
+    transform: translateX(0);
+  }
+  6.5% {
+    transform: translateX(-6px) rotateY(-9deg);
+  }
+  18.5% {
+    transform: translateX(5px) rotateY(7deg);
+  }
+  31.5% {
+    transform: translateX(-3px) rotateY(-5deg);
+  }
+  43.5% {
+    transform: translateX(2px) rotateY(3deg);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}
+
+.headShake {
+  animation-timing-function: ease-in-out;
+  animation-name: headShake;
+}
+
+.animated {
+  animation-duration: 500ms;
+  animation-fill-mode: both;
 }
