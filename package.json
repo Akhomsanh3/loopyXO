@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.12",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  },
+  "name": "foreverTTT",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Abhishek Soni <abhisheksoni2720@gmail.com>",
+  "license": "MIT"
+}
