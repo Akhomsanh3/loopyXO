@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "Abhishek Soni <abhisheksoni2720@gmail.com>",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
