@@ -2,7 +2,7 @@
 
 A Tic-Tac-Toe game with a timer and an infinite loop. :repeat: :clock9: (**WORKS OFFLINE!** :blue_heart:)
 
-![](https://img.shields.io/badge/type-Progressive%20Web%20App-blue.svg)
+![LoopyXO Progressive App](https://img.shields.io/badge/type-Progressive%20Web%20App-blue.svg)
 
 ![LoopyXO's Screenshot]()
 
