@@ -32,8 +32,8 @@ gulp.task('generate-service-worker', function (callback) {
         ],
         cacheId: 'loopyXO',
         runtimeCaching: [{
-            urlPattern: /google/g,
-            handler: 'fastest'
+            urlPattern: /analytics.js$/g,
+            handler: 'cacheFirst'
         }],
         // handleFetch:false
     }, callback);

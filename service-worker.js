@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["build/index.js","85134db250be1b58b9a50d50fc14281a"],["index.html","00c7ede1b62d71a22f5e817139cc03e4"],["js/fabric.min.js","2db346e530f4ea57e1ab301f39fc3865"],["js/lodash.min.js","c8515f131f3194c32a3670c8e274fab6"],["js/snackbarlight.min.js","3a56c3d76d8b66a020ffd058a6ef096b"],["snackbarlight.min.css","1ce9c4d84394758b88fa47556ade26bc"],["style.css","ae7f86c1fc97ac8062b8891af473a8a6"]];
+var precacheConfig = [["build/index.js","85134db250be1b58b9a50d50fc14281a"],["index.html","5c25a8bc3ebd8dfb5aca11f59f674a59"],["js/fabric.min.js","2db346e530f4ea57e1ab301f39fc3865"],["js/lodash.min.js","c8515f131f3194c32a3670c8e274fab6"],["js/service-worker-registration.js","5e5a0c53bdf81cdb32772565da3ad459"],["js/snackbarlight.min.js","3a56c3d76d8b66a020ffd058a6ef096b"],["raleway.css","352812863b3ad9d929296c8bbc542d79"],["snackbarlight.min.css","1ce9c4d84394758b88fa47556ade26bc"],["style.css","ae7f86c1fc97ac8062b8891af473a8a6"]];
 var cacheName = 'sw-precache-v3-loopyXO-' + (self.registration ? self.registration.scope : '');
 
 
@@ -285,7 +285,7 @@ self.addEventListener('fetch', function(event) {
 
 // Runtime cache configuration, using the sw-toolbox library.
 
-toolbox.router.get(/google/g, toolbox.fastest, {});
+toolbox.router.get(/analytics.js$/g, toolbox.cacheFirst, {});
 
 
 
