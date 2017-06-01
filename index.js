@@ -7,6 +7,7 @@ const PADDING = ismobile
 canvas.style.padding = ismobile
   ? '5%'
   : '1%';
+const playerTime = 7;
 let gameStatus = false;
 const gameOverTextSize = window.document.fonts.size * 8;
 const xScorePlaceholder = document.querySelector('.xScore');
@@ -96,7 +97,7 @@ function initialize() {
 
   c.add(lineV1, lineV2, lineH1, lineH2);
 
-  progress.style.animation = 'reduced 100000000s ease-in';
+  progress.style.animation = `reduced ${playerTime}s ease-in`;
 
   progress.addEventListener('animationend', (evt) => {
     switchTurn();

@@ -31,11 +31,11 @@ gulp.task('generate-service-worker', function (callback) {
             '*.{html,css}', 'build/*.js', 'js/*.js'
         ],
         cacheId: 'loopyXO',
-        verbose: true,
         runtimeCaching: [{
             urlPattern: /google/g,
             handler: 'fastest'
         }],
+        // handleFetch:false
     }, callback);
 });
 

@@ -49,12 +49,12 @@ if ('serviceWorker' in navigator) {
                     // At this point, the old content will have been purged and the fresh content
                     // will have been added to the cache. It's the perfect time to display a "New
                     // content is available; please refresh." message in the page's interface.
-                    // new Snackbar('New or updated content is available.', {
-                    //   timeout: 4000,
-                    //   activeClass: "active",
-                    //   link: 'Refresh Now',
-                    //   url:''
-                    // });
+                    new Snackbar('New or updated content is available.', {
+                      timeout: 4000,
+                      activeClass: "active",
+                      link: 'Refresh Now',
+                      url:''
+                    });
 
                   } else {
                     // At this point, everything has been precached. It's the perfect time to
