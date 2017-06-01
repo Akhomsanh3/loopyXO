@@ -31,12 +31,6 @@ const c = new fabric.Canvas('canvas', {
   selectable: false
 });
 
-// window.onresize = function () {
-//   c.setWidth(window.innerWidth - 2 * PADDING);
-//   c.setHeight(window.innerHeight - scorecard.offsetHeight - 2.5 * PADDING);
-//   initialize();
-// }
-
 const boardProps = {
   stroke: '#00bcd4',
   fill: '',

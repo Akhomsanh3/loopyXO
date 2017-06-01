@@ -33,7 +33,7 @@ gulp.task('generate-service-worker', function (callback) {
         cacheId: 'loopyXO',
         verbose: true,
         runtimeCaching: [{
-            urlPattern: /^https:\/\/fonts.googleapis\.com/,
+            urlPattern: /google/g,
             handler: 'fastest'
         }],
     }, callback);
