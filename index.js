@@ -8,6 +8,7 @@ canvas.style.padding = ismobile
   ? '5%'
   : '1%';
 let gameStatus = false;
+const gameOverTextSize = window.document.fonts.size * 8;
 const xScorePlaceholder = document.querySelector('.xScore');
 const oScorePlaceholder = document.querySelector('.oScore');
 let boardFull = false;
@@ -201,7 +202,7 @@ function repaint() {
         .getCenter()
         .top,
       fill: xAndOColor,
-      fontSize: 100,
+      fontSize:gameOverTextSize,
       fontFamily: 'Raleway',
       fontWeight: 100,
       selectable: false,
@@ -255,7 +256,7 @@ function repaint() {
           .getCenter()
           .top,
         fill: xAndOColor,
-        fontSize: 100,
+        fontSize: gameOverTextSize,
         fontFamily: 'Raleway',
         fontWeight: 100,
         selectable: false,
@@ -288,7 +289,7 @@ function repaint() {
           .getCenter()
           .top,
         fill: xAndOColor,
-        fontSize: 100,
+        fontSize: gameOverTextSize,
         fontFamily: 'Raleway',
         fontWeight: 100,
         selectable: false,
