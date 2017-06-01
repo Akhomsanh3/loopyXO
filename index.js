@@ -1,8 +1,12 @@
-// window.onresize = function(){ location.reload();}
-
-const ismobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
-const PADDING = ismobile ? (window.outerWidth * 5 / 100) : (window.outerWidth / 100);
-canvas.style.padding = ismobile ? '5%' : '1%';
+const ismobile = navigator
+  .userAgent
+  .match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+const PADDING = ismobile
+  ? (window.outerWidth * 5 / 100)
+  : (window.outerWidth / 100);
+canvas.style.padding = ismobile
+  ? '5%'
+  : '1%';
 let gameStatus = false;
 const xScorePlaceholder = document.querySelector('.xScore');
 const oScorePlaceholder = document.querySelector('.oScore');
@@ -26,6 +30,12 @@ const c = new fabric.Canvas('canvas', {
   selectable: false
 });
 
+// window.onresize = function () {
+//   c.setWidth(window.innerWidth - 2 * PADDING);
+//   c.setHeight(window.innerHeight - scorecard.offsetHeight - 2.5 * PADDING);
+//   initialize();
+// }
+
 const boardProps = {
   stroke: '#00bcd4',
   fill: '',
@@ -39,65 +49,68 @@ const oneThirdWidth = Math.floor(width / 3);
 const oneThirdHeight = Math.floor(height / 3);
 
 let rectangles = [];
-
 let count = 0;
 
-for (let i = 0; i < 3; i++) {
-  for (let j = 0; j < 3; j++) {
-    let temp = new fabric.Rect({
-      top: i * oneThirdHeight,
-      left: j * oneThirdWidth,
-      height: oneThirdHeight - 2,
-      width: oneThirdWidth - 2,
-      fill: '',
-      stroke: 'white',
-      selectable: false,
-      id: (count++).toString(),
-      occupied: false
-    });
-    rectangles.push(temp);
+function initialize() {
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      let temp = new fabric.Rect({
+        top: i * oneThirdHeight,
+        left: j * oneThirdWidth,
+        height: oneThirdHeight - 2,
+        width: oneThirdWidth - 2,
+        fill: '',
+        stroke: 'white',
+        selectable: false,
+        id: (count++).toString(),
+        occupied: false
+      });
+      rectangles.push(temp);
+    }
   }
+
+  rectangles.forEach((rectangle) => {
+    c.add(rectangle);
+  });
+
+  const lineV1 = new fabric.Line([
+    oneThirdWidth - 2,
+    0,
+    oneThirdWidth - 2,
+    height
+  ], boardProps);
+
+  const lineV2 = new fabric.Line([
+    2 * oneThirdWidth - 2,
+    0,
+    2 * oneThirdWidth - 2,
+    height
+  ], boardProps);
+
+  const lineH1 = new fabric.Line([
+    0, oneThirdHeight - 2,
+    width,
+    oneThirdHeight - 2
+  ], boardProps);
+
+  const lineH2 = new fabric.Line([
+    0, 2 * oneThirdHeight - 2,
+    width,
+    2 * oneThirdHeight - 2
+  ], boardProps);
+
+  c.add(lineV1, lineV2, lineH1, lineH2);
+
+  progress.style.animation = 'reduced 100000000s ease-in';
+
+  progress.addEventListener('animationend', (evt) => {
+    switchTurn();
+    cloneProgress();
+    repaint();
+  });
+
+  startGame();
 }
-
-rectangles.forEach((rectangle) => {
-  c.add(rectangle);
-});
-
-let lineV1 = new fabric.Line([
-  oneThirdWidth - 2,
-  0,
-  oneThirdWidth - 2,
-  height
-], boardProps);
-
-let lineV2 = new fabric.Line([
-  2 * oneThirdWidth - 2,
-  0,
-  2 * oneThirdWidth - 2,
-  height
-], boardProps);
-
-let lineH1 = new fabric.Line([
-  0, oneThirdHeight - 2,
-  width,
-  oneThirdHeight - 2
-], boardProps);
-
-let lineH2 = new fabric.Line([
-  0, 2 * oneThirdHeight - 2,
-  width,
-  2 * oneThirdHeight - 2
-], boardProps);
-
-c.add(lineV1, lineV2, lineH1, lineH2);
-
-progress.style.animation = 'reduced 100000000s ease-in';
-
-progress.addEventListener('animationend', (evt) => {
-  switchTurn();
-  cloneProgress();
-  repaint();
-});
 
 function startGame() {
 
@@ -152,9 +165,9 @@ function startGame() {
       return;
     }
     // Check if the game is over
-    let position = TURN === 'X' ?
-      xPosition :
-      oPosition;
+    let position = TURN === 'X'
+      ? xPosition
+      : oPosition;
 
     if (areWeDoneHere(position, clickedRect)) {
       repaint();
@@ -234,7 +247,7 @@ function repaint() {
         .classList
         .add('shake');
 
-      let tempX = new fabric.Text('X WON!', {
+      const tempX = new fabric.Text('X WON!', {
         left: c
           .getCenter()
           .left,
@@ -267,7 +280,7 @@ function repaint() {
       oScoreContainer
         .classList
         .add('shake');
-      let tempO = new fabric.Text('O WON!', {
+      const tempO = new fabric.Text('O WON!', {
         left: c
           .getCenter()
           .left,
@@ -320,9 +333,9 @@ function areWeDoneHere(position, clickedRect) {
     hypothesis.some((hy) => {
       gameStatus = _
         .difference(winH, hy)
-        .length == 0 ?
-        true :
-        false;
+        .length == 0
+        ? true
+        : false;
       return gameStatus;
     });
 
@@ -335,7 +348,7 @@ function areWeDoneHere(position, clickedRect) {
 function divideThemInChunks(collection) {
   let chunks = [];
 
-  let keys = [...Array(collection.length).keys()];
+  const keys = [...Array(collection.length).keys()];
 
   keys.forEach((key) => {
     let copy = [...collection];
@@ -348,9 +361,9 @@ function divideThemInChunks(collection) {
 }
 
 function switchTurn() {
-  TURN = TURN === 'X' ?
-    'O' :
-    'X';
+  TURN = TURN === 'X'
+    ? 'O'
+    : 'X';
 }
 
 function cloneProgress() {
@@ -368,4 +381,4 @@ function cloneProgress() {
   });
 }
 
-startGame();
+initialize();

@@ -8,7 +8,9 @@ var babel = require("gulp-babel");
 gulp.task('js', function () {
     return gulp
         .src('index.js')
-        .pipe(babel({presets: ['es2015']}))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .on('error', function (err) {
             console.log(err.toString());
@@ -32,9 +34,12 @@ gulp.task('generate-service-worker', function (callback) {
         staticFileGlobs: [
             '*.{html,css}', 'build/*.js', 'js/*.js'
         ],
-        handleFetch: false,
-        cacheId: 'foreverTTT',
-        verbose: true
+        cacheId: 'loopyXO',
+        verbose: true,
+        runtimeCaching: [{
+            urlPattern: /^https:\/\/fonts.googleapis\.com/,
+            handler: 'fastest'
+        }],
     }, callback);
 });
 
