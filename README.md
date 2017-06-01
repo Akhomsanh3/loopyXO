@@ -4,7 +4,7 @@ A Tic-Tac-Toe game with a timer and an infinite loop. :repeat: :clock9: (**WORKS
 
 [![LoopyXO Progressive App](https://img.shields.io/badge/type-PWA-blue.svg)]()
 
-![LoopyXO's Screenshot]()
+![LoopyXO's Screenshot](https://raw.githubusercontent.com/abhisheksoni27/code-snipper/master/images/loopyXO.gif)
 
 ## How to make it work at home
 
