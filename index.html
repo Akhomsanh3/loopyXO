@@ -1,37 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Forever TTT</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="theme-color" content="#00bcd4">
-    <link rel="manifest" href="/manifest.json">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Loopy X &amp; O</title>
+    <link rel='stylesheet' href='style.css'>
+    <meta name='theme-color' content='#00bcd4'>
+    <link rel='manifest' href='/manifest.json'>
+    <!--Meta elements taken from notwaldorf's doodle-->
+    <!--https://github.com/notwaldorf/doodle-->
+    <meta name='mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+
+    <link rel='shortcut icon' href='./images/favicon.ico'>
+    <meta name='application-name' content='loopyxo'>
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
+    <meta name='apple-mobile-web-app-title' content='loopyxo'>
+    <!-- Homescreen icons -->
+    <link rel='apple-touch-icon' sizes='192x192' href='./images/icon-192x192.png'>
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name='msapplication-TileImage' content='./images/icon-192x192.png'>
+    <meta name='msapplication-TileColor' content='#00bcd4'>
+    <meta name='msapplication-tap-highlight' content='no'>
+    <script src='service-worker-registration.js'></script>
 </head>
 
 <body>
-    <div style="display:flex; flex-direction: column">
-        <div id="progress" width=0 height=0>
+    <div style='display:flex; flex-direction: column'>
+        <div id='progress' width=0 height=0>
 
         </div>
-        <header id="scorecard">
-            <p id="xScoreContainer">X: <span class="xScore">0</span></p>
+        <header id='scorecard'>
+            <p id='xScoreContainer'>X: <span class='xScore'>0</span></p>
 
-            <h2>Forever TTT</h2>
+            <h2>Loopy X &amp; O</h2>
 
-            <p id="oScoreContainer">O: <span class="oScore">0</span></p>
+            <p id='oScoreContainer'>O: <span class='oScore'>0</span></p>
         
         </header>
-        <canvas id="canvas">
+        <canvas id='canvas'>
         </canvas>
     </div>
 
 
-    <script src="js/fabric.min.js"></script>
-    <script src="js/lodash.min.js"></script>
-    <script src="build/index.js"></script>
+    <script src='js/fabric.min.js'></script>
+    <script src='js/lodash.min.js'></script>
+    <script src='build/index.js'></script>
 </body>
 
 </html>
