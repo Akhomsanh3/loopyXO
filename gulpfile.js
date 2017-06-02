@@ -35,7 +35,7 @@ gulp.task('generate-service-worker', function (callback) {
             urlPattern: /analytics.js$/g,
             handler: 'cacheFirst'
         }],
-        // handleFetch:false
+        // skipWaiting:false
     }, callback);
 });
 

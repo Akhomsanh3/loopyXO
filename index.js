@@ -1,3 +1,9 @@
+let computer = false;
+
+const onePlayer = document.querySelector('.onePlayer');
+const twoPlayer = document.querySelector('.twoPlayer');
+const fragment = document.querySelector('.fragment');
+
 const ismobile = navigator
   .userAgent
   .match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
@@ -18,7 +24,7 @@ let oScore = 0;
 let labels = [];
 const xAndOColor = '#FFC107';
 
-const WIN = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5,
+const WIN = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6] ,[1, 4, 7], [2, 5,
 8], [0, 4, 8], [2, 4, 6] ];
 
 let xPosition = [];
@@ -38,6 +44,50 @@ const boardProps = {
   strokeWidth: 1,
   selectable: false
 };
+
+onePlayer.onclick = (e) => {
+  e.preventDefault();
+  computer = true;
+  let playerText = new fabric.Text("It's your turn!", {
+    left: c.getWidth() / 2,
+    top: c.getHeight() / 2,
+    fill: xAndOColor,
+    fontSize: window.document.fonts.size * 5,
+    fontFamily: 'Raleway',
+    fontWeight: 400,
+    selectable: false,
+    originX: 'center',
+    originY: 'center'
+  });
+  fragment.style.visibility = 'hidden';
+  c.add(playerText);
+  setTimeout(() => {
+    c.remove(playerText);
+  }, 400);
+  startGame();
+}
+
+twoPlayer.onclick = () => {
+  computer = false;
+
+  let playerText = new fabric.Text('Two Players', {
+    left: c.getWidth() / 2,
+    top: c.getHeight() / 2,
+    fill: xAndOColor,
+    fontSize: window.document.fonts.size * 5,
+    fontFamily: 'Raleway',
+    fontWeight: 400,
+    selectable: false,
+    originX: 'center',
+    originY: 'center'
+  });
+  fragment.style.visibility = 'hidden';
+  c.add(playerText);
+  setTimeout(() => {
+    c.remove(playerText);
+  }, 400);
+  startGame();
+}
 
 const height = canvas.clientHeight - PADDING;
 const width = canvas.clientWidth - PADDING;
@@ -97,6 +147,10 @@ function initialize() {
 
   c.add(lineV1, lineV2, lineH1, lineH2);
 
+}
+
+function startGame() {
+
   progress.style.animation = `reduced ${playerTime}s ease-in`;
 
   progress.addEventListener('animationend', (evt) => {
@@ -104,11 +158,6 @@ function initialize() {
     cloneProgress();
     repaint();
   });
-
-  startGame();
-}
-
-function startGame() {
 
   c.on('mouse:down', (evt) => {
 
@@ -119,10 +168,14 @@ function startGame() {
     });
 
     clickedRect = clickedRect[0];
+    // Check if the game is over
+    let position = TURN === 'X'
+      ? xPosition
+      : oPosition;
 
-    let turnText = TURN;
+    position.push(parseInt(clickedRect.id));
 
-    var text = new fabric.Text(turnText, {
+    var text = new fabric.Text(TURN, {
       left: clickedRect.left + clickedRect.width / 2,
       top: clickedRect.top + clickedRect.height / 2,
       fill: xAndOColor,
@@ -155,24 +208,95 @@ function startGame() {
 
     c.add(text);
 
+    switchTurn();
+
     if (labels.length === 9) {
       boardFull = true;
       repaint();
       return;
     }
-    // Check if the game is over
-    let position = TURN === 'X'
-      ? xPosition
-      : oPosition;
+    console.log(TURN);
 
     if (areWeDoneHere(position, clickedRect)) {
+      switchTurn();
       repaint();
       return;
     }
 
-    switchTurn();
+    if (computer) {
+      playComputer();
+    }
 
   });
+
+}
+
+function randomRectangle() {
+  let temp = [...Array(9).keys()];
+  let p = [
+    ...xPosition,
+    ...oPosition
+  ].sort();
+  temp = temp.filter((key) => {
+    return !_.includes(p, key);
+  });
+  return _.sample(temp);
+}
+
+function playComputer() {
+
+  let clickedRectID = randomRectangle(xPosition, oPosition);
+
+  let clickedRect = rectangles.filter((rectangle) => {
+    if (parseInt(rectangle.id) === clickedRectID) {
+      return true
+    }
+  });
+
+  clickedRect = clickedRect[0];
+
+  let text = new fabric.Text(TURN, {
+    left: clickedRect.left + clickedRect.width / 2,
+    top: clickedRect.top + clickedRect.height / 2,
+    fill: xAndOColor,
+    fontSize: clickedRect.width / 2,
+    fontFamily: 'Raleway',
+    fontWeight: 100,
+    selectable: false,
+    originX: 'center',
+    originY: 'center'
+  });
+
+  labels.push(text);
+
+  text.animate('fontSize', clickedRect.width / 1.87, {
+    onChange: c
+      .renderAll
+      .bind(c),
+    duration: 100,
+    oncomplete: c.renderAll()
+  });
+
+  c.add(text);
+
+  let position = TURN === 'X'
+    ? xPosition
+    : oPosition;
+
+  position.push(parseInt(clickedRect.id));
+
+  if (labels.length === 9) {
+    boardFull = true;
+    repaint();
+    return;
+  }
+
+  if (areWeDoneHere(position, clickedRect)) {
+    repaint();
+    return;
+  }
+
+  switchTurn();
 
 }
 
@@ -197,7 +321,7 @@ function repaint() {
         .getCenter()
         .top,
       fill: xAndOColor,
-      fontSize:gameOverTextSize,
+      fontSize: gameOverTextSize,
       fontFamily: 'Raleway',
       fontWeight: 100,
       selectable: false,
@@ -311,7 +435,6 @@ function repaint() {
 }
 
 function areWeDoneHere(position, clickedRect) {
-  position.push(parseInt(clickedRect.id));
   WIN.some((winH) => {
     let hypothesis;
     if (position.length > 3) {
