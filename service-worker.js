@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["build/index.js","056efd93a58d6eac530ff77b54af571b"],["index.html","1946c149e4fffab8e04af74be811d48f"],["js/fabric.min.js","2db346e530f4ea57e1ab301f39fc3865"],["js/lodash.min.js","c8515f131f3194c32a3670c8e274fab6"],["js/service-worker-registration.js","5e5a0c53bdf81cdb32772565da3ad459"],["js/snackbarlight.min.js","3a56c3d76d8b66a020ffd058a6ef096b"],["raleway.css","352812863b3ad9d929296c8bbc542d79"],["snackbarlight.min.css","1ce9c4d84394758b88fa47556ade26bc"],["style.css","bcfe1f350ce688aa864df0386b2be8d4"]];
+var precacheConfig = [["build/index.js","82af008bd0b5fe9a91f20b1afd06db41"],["index.html","1946c149e4fffab8e04af74be811d48f"],["js/fabric.min.js","2db346e530f4ea57e1ab301f39fc3865"],["js/lodash.min.js","c8515f131f3194c32a3670c8e274fab6"],["js/service-worker-registration.js","5e5a0c53bdf81cdb32772565da3ad459"],["js/snackbarlight.min.js","3a56c3d76d8b66a020ffd058a6ef096b"],["raleway.css","352812863b3ad9d929296c8bbc542d79"],["snackbarlight.min.css","1ce9c4d84394758b88fa47556ade26bc"],["style.css","bcfe1f350ce688aa864df0386b2be8d4"]];
 var cacheName = 'sw-precache-v3-loopyXO-' + (self.registration ? self.registration.scope : '');
 
 
