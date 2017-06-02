@@ -7,9 +7,7 @@ var babel = require("gulp-babel");
 gulp.task('js', function () {
     return gulp
         .src('index.js')
-        .pipe(babel({
-            presets: ['es2015']
-        }))
+        .pipe(babel({presets: ['es2015']}))
         .pipe(uglify())
         .on('error', function (err) {
             console.log(err.toString());
@@ -22,7 +20,7 @@ gulp.task('js-watch', ['js'], function (done) {
     done();
 });
 
-gulp.task('generate-service-worker', function (callback) {
+gulp.task('generate-service-worker', ['js'], function (callback) {
     var path = require('path');
     var swPrecache = require('sw-precache');
 
@@ -31,11 +29,13 @@ gulp.task('generate-service-worker', function (callback) {
             '*.{html,css}', 'build/*.js', 'js/*.js'
         ],
         cacheId: 'loopy-XO',
-        runtimeCaching: [{
-            urlPattern: /analytics.js$/g,
-            handler: 'cacheFirst'
-        }],
-        // handleFetch:false,
+        runtimeCaching: [
+            {
+                urlPattern: /analytics.js$/g,
+                handler: 'cacheFirst'
+            }
+        ],
+        // handleFetch:false, 
         skipWaiting:true
     }, callback);
 });
