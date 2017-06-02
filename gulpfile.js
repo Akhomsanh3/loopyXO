@@ -30,12 +30,13 @@ gulp.task('generate-service-worker', function (callback) {
         staticFileGlobs: [
             '*.{html,css}', 'build/*.js', 'js/*.js'
         ],
-        cacheId: 'loopyXO',
+        cacheId: 'loopy-XO',
         runtimeCaching: [{
             urlPattern: /analytics.js$/g,
             handler: 'cacheFirst'
         }],
-        // skipWaiting:false
+        // handleFetch:false,
+        skipWaiting:true
     }, callback);
 });
 
