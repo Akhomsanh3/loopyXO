@@ -1,6 +1,6 @@
 {
   "name": "foreverTTT",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "main": "index.js",
   "author": "Abhishek Soni <abhisheksoni2720@gmail.com>",
   "description": "A Tic-Tac-Toe game with a timer and an infinite loop",
