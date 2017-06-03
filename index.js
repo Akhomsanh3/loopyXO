@@ -7,13 +7,13 @@ const fragment = document.querySelector('.fragment');
 const ismobile = navigator
   .userAgent
   .match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
-const PADDING = ismobile
-  ? (window.outerWidth * 5 / 100)
-  : (window.outerWidth / 100);
-canvas.style.padding = ismobile
-  ? '5%'
-  : '1%';
-const playerTime = 7;
+const PADDING = ismobile ?
+  (window.outerWidth * 5 / 100) :
+  (window.outerWidth / 100);
+canvas.style.padding = ismobile ?
+  '5%' :
+  '1%';
+const playerTime = 70000000000;
 let gameStatus = false;
 const gameOverTextSize = window.document.fonts.size * 8;
 const xScorePlaceholder = document.querySelector('.xScore');
@@ -24,8 +24,10 @@ let oScore = 0;
 let labels = [];
 const xAndOColor = '#FFC107';
 
-const WIN = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6] ,[1, 4, 7], [2, 5,
-8], [0, 4, 8], [2, 4, 6] ];
+const totalMoves = [...Array(9).keys()];
+
+const WIN = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6] ,[1, 4, 7], [2, 5,
+8], [0, 4, 8], [2, 4, 6]];
 
 let xPosition = [];
 let oPosition = [];
@@ -169,9 +171,9 @@ function startGame() {
 
     clickedRect = clickedRect[0];
     // Check if the game is over
-    let position = TURN === 'X'
-      ? xPosition
-      : oPosition;
+    let position = TURN === 'X' ?
+      xPosition :
+      oPosition;
 
     position.push(parseInt(clickedRect.id));
 
@@ -215,7 +217,7 @@ function startGame() {
       repaint();
       return;
     }
-    console.log(TURN);
+    // // console.log(TURN);
 
     if (areWeDoneHere(position, clickedRect)) {
       switchTurn();
@@ -231,29 +233,183 @@ function startGame() {
 
 }
 
+function getHypothesis(position, availableMoves, count) {
+
+  let invertM = invertMoves(availableMoves);
+
+  let _WIN = WIN.slice();
+  // console.log(_WIN);
+  let hypothesis;
+
+  switch (count) {
+    case 2:
+      hypothesis = divideThemInChunks(position);
+      break;
+
+    case 3:
+      hypothesis = divideThemInChunks(position);
+      break;
+
+    case 4:
+      hypothesis = divideThemInChunks(position)
+      break;
+  }
+
+  let move = [];
+  let leastDifference = [];
+  let winf = [];
+
+  _WIN = WIN.map((winH) => {
+    let _winH = winH.slice();
+    return _.pullAll([..._winH], invertM);
+  });
+
+
+  _WIN.forEach((winH) => {
+    let _winH = winH.slice();
+    hypothesis.forEach((hy) => {
+
+      console.log("Difference between", _winH, " and ", hy, "is = ", _.difference(_winH, hy));
+
+      if (_.difference(_winH, hy).length <= 2) {
+        winf.push(_.pullAll([..._winH], hy));
+      };
+
+    });
+  });
+
+  leastDifference = _.flatten(_.uniq(winf));
+
+  let leastLength;
+
+  // console.log("Least Difference = ", leastDifference);
+  // // console.log(leastLength);
+
+  // leastDifference.forEach((pair, index) => {
+  //   if (pair.length < leastLength) {
+  //     move.push(leastDifference[index]);
+  //   }
+  // });
+
+
+  // if(move.length == 0){
+  //   move = _.uniq(leastDifference);
+  // }
+
+  move = _.uniq(leastDifference);
+  // move = _.flatten(move);
+
+
+
+  // console.log("Move = ", move);
+
+  let maximizingMoves = move.filter((eachMove) => {
+    gameStatus = false;
+    return areWeDoneHere(position, eachMove);
+  });
+
+  // console.log("MaximizingMoves = " ,maximizingMoves);
+
+  gameStatus = false;
+
+  // // console.log(_move);
+  // // console.log(_.sample(move));
+
+  if (maximizingMoves.length === 0) {
+    return _.sample(move);
+  }
+
+  return _.sample(maximizingMoves);
+}
+
 function randomRectangle() {
-  let temp = [...Array(9).keys()];
-  let p = [
+
+  const playedMoves = [
     ...xPosition,
     ...oPosition
   ].sort();
-  temp = temp.filter((key) => {
-    return !_.includes(p, key);
+
+  const availableMoves = totalMoves.filter((move) => {
+    return !_.includes(playedMoves, move);
   });
-  return _.sample(temp);
+
+  const stage = TURN === 'X' ?
+    oPosition.length :
+    xPosition.length;
+
+  const position = TURN === 'X' ? oPosition : xPosition;
+  const nextPosition = TURN !== 'X' ? oPosition : xPosition;
+
+  switch (stage) {
+    case 1:
+      {
+        console.log(availableMoves);
+        if (_.includes(availableMoves, 4)) {
+          return 4;
+        } else {
+          return _.sample(availableMoves);
+        }
+        break;
+      }
+    case 2:
+      {
+        return getHypothesis(position, availableMoves, 2);
+        break;
+      }
+    case 3:
+      {
+        // In case the player is not at their best
+
+        let temp = getHypothesis(nextPosition, availableMoves, 3);
+
+        if (temp) {
+          return temp;
+        }
+
+        return getHypothesis(position, availableMoves, 3);
+        break;
+      }
+    case 4:
+      {
+        // In case the player is not at their best
+
+        let temp = getHypothesis(nextPosition, availableMoves, 3);
+
+        if (temp) {
+          return temp;
+        }
+
+        return getHypothesis(position, availableMoves, 4);
+        break;
+      }
+      // default:
+      //   return _.sample(availableMoves);
+      //   break;
+  }
 }
 
 function playComputer() {
 
   let clickedRectID = randomRectangle(xPosition, oPosition);
+  clickedRectID = Array.isArray(clickedRectID) ? clickedRectID[0] : clickedRectID;
+  // console.log(clickedRectID);
 
   let clickedRect = rectangles.filter((rectangle) => {
     if (parseInt(rectangle.id) === clickedRectID) {
       return true
     }
   });
-
   clickedRect = clickedRect[0];
+  // console.log(clickedRect);
+
+
+  let position = TURN === 'X' ?
+    xPosition :
+    oPosition;
+
+  position.push(parseInt(clickedRect.id));
+  // // console.log("X = ", xPosition, "O = ", oPosition);
+
 
   let text = new fabric.Text(TURN, {
     left: clickedRect.left + clickedRect.width / 2,
@@ -278,12 +434,6 @@ function playComputer() {
   });
 
   c.add(text);
-
-  let position = TURN === 'X'
-    ? xPosition
-    : oPosition;
-
-  position.push(parseInt(clickedRect.id));
 
   if (labels.length === 9) {
     boardFull = true;
@@ -435,13 +585,30 @@ function repaint() {
 }
 
 function areWeDoneHere(position, clickedRect) {
-  WIN.some((winH) => {
+
+  let _position = position.slice();
+
+  if (Number.isInteger(clickedRect)) {
+    // console.log("Clicked ", clickedRect);
+    _position.push(clickedRect);
+  }
+
+  _position = _position.sort();
+
+  // // console.log(position, "----------", _position);
+
+  const _WIN = WIN.slice();
+
+  _WIN.some((winH) => {
+    let _winH = winH.slice();
     let hypothesis;
-    if (position.length > 3) {
-      hypothesis = divideThemInChunks(position);
-    } else if (position.length === 3) {
-      hypothesis = _.chunk(position, 3);
+    // // console.log("Position= ",position);
+    if (_position.length > 3) {
+      hypothesis = divideThemInChunks(_position);
+    } else if (_position.length === 3) {
+      hypothesis = _.chunk(_position, 3);
     } else {
+      // // console.log(xPosition === position);
       return false;
     }
 
@@ -450,17 +617,17 @@ function areWeDoneHere(position, clickedRect) {
     });
 
     hypothesis.some((hy) => {
+      // // console.log("Difference between", winH, " and ", hy, "is = ",_.difference(winH, hy).length);
       gameStatus = _
-        .difference(winH, hy)
-        .length == 0
-        ? true
-        : false;
+        .difference(hy, _winH)
+        .length == 0 ?
+        true :
+        false;
       return gameStatus;
     });
 
     return gameStatus;
   });
-
   return gameStatus;
 }
 
@@ -476,13 +643,20 @@ function divideThemInChunks(collection) {
 
     chunks.push(temp);
   });
+
+  // // console.log("Chunks are = ", chunks);
+
   return _.uniq(chunks);
 }
 
+function invertMoves(moves) {
+  return _.difference(totalMoves, moves);
+}
+
 function switchTurn() {
-  TURN = TURN === 'X'
-    ? 'O'
-    : 'X';
+  TURN = TURN === 'X' ?
+    'O' :
+    'X';
 }
 
 function cloneProgress() {

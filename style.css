@@ -4,6 +4,11 @@ body {
   padding: 0;
 }
 
+h2>a {
+  text-decoration: none;
+  color: black;
+}
+
 #canvas {
   /*background: black;*/
   flex: 7;
@@ -139,9 +144,9 @@ body {
   background: #FFC107;
   padding: 5% 0%;
   margin-bottom: 5%;
-  box-shadow: 0px 0px 6px 0px #000000;  
-  width:100%;
-  font-size:calc(100*1.5%);
+  box-shadow: 0px 0px 6px 0px #000000;
+  width: 100%;
+  font-size: calc(100*1.5%);
   transition: box-shadow 0.4s ease, background 0.4s ease;
 }
 
@@ -150,10 +155,10 @@ body {
   background: #FFE082
 }
 
-.fragmentContent p:first-child{
+.fragmentContent p:first-child {
   margin-bottom: 0px;
 }
 
-.fragmentContent button:last-child{
+.fragmentContent button:last-child {
   margin-bottom: 0px;
 }
