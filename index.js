@@ -13,7 +13,7 @@ const PADDING = ismobile ?
 canvas.style.padding = ismobile ?
   '5%' :
   '1%';
-const playerTime = 70000000000;
+const playerTime = 7;
 let gameStatus = false;
 const gameOverTextSize = window.document.fonts.size * 8;
 const xScorePlaceholder = document.querySelector('.xScore');
