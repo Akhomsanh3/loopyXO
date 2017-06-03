@@ -36,7 +36,7 @@ gulp.task('generate-service-worker', ['js'], function (callback) {
             }
         ],
         // handleFetch:false,
-        skipWaiting:true
+        // skipWaiting:true
     }, callback);
 });
 

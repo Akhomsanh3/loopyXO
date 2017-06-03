@@ -238,7 +238,6 @@ function getHypothesis(position, availableMoves, count) {
   let invertM = invertMoves(availableMoves);
 
   let _WIN = WIN.slice();
-  // console.log(_WIN);
   let hypothesis;
 
   switch (count) {
@@ -269,8 +268,6 @@ function getHypothesis(position, availableMoves, count) {
     let _winH = winH.slice();
     hypothesis.forEach((hy) => {
 
-      console.log("Difference between", _winH, " and ", hy, "is = ", _.difference(_winH, hy));
-
       if (_.difference(_winH, hy).length <= 2) {
         winf.push(_.pullAll([..._winH], hy));
       };
@@ -282,38 +279,14 @@ function getHypothesis(position, availableMoves, count) {
 
   let leastLength;
 
-  // console.log("Least Difference = ", leastDifference);
-  // // console.log(leastLength);
-
-  // leastDifference.forEach((pair, index) => {
-  //   if (pair.length < leastLength) {
-  //     move.push(leastDifference[index]);
-  //   }
-  // });
-
-
-  // if(move.length == 0){
-  //   move = _.uniq(leastDifference);
-  // }
-
   move = _.uniq(leastDifference);
-  // move = _.flatten(move);
-
-
-
-  // console.log("Move = ", move);
 
   let maximizingMoves = move.filter((eachMove) => {
     gameStatus = false;
     return areWeDoneHere(position, eachMove);
   });
 
-  // console.log("MaximizingMoves = " ,maximizingMoves);
-
   gameStatus = false;
-
-  // // console.log(_move);
-  // // console.log(_.sample(move));
 
   if (maximizingMoves.length === 0) {
     return _.sample(move);
@@ -382,9 +355,6 @@ function randomRectangle() {
         return getHypothesis(position, availableMoves, 4);
         break;
       }
-      // default:
-      //   return _.sample(availableMoves);
-      //   break;
   }
 }
 
@@ -392,7 +362,6 @@ function playComputer() {
 
   let clickedRectID = randomRectangle(xPosition, oPosition);
   clickedRectID = Array.isArray(clickedRectID) ? clickedRectID[0] : clickedRectID;
-  // console.log(clickedRectID);
 
   let clickedRect = rectangles.filter((rectangle) => {
     if (parseInt(rectangle.id) === clickedRectID) {
@@ -400,16 +369,12 @@ function playComputer() {
     }
   });
   clickedRect = clickedRect[0];
-  // console.log(clickedRect);
-
 
   let position = TURN === 'X' ?
     xPosition :
     oPosition;
 
   position.push(parseInt(clickedRect.id));
-  // // console.log("X = ", xPosition, "O = ", oPosition);
-
 
   let text = new fabric.Text(TURN, {
     left: clickedRect.left + clickedRect.width / 2,
@@ -589,26 +554,23 @@ function areWeDoneHere(position, clickedRect) {
   let _position = position.slice();
 
   if (Number.isInteger(clickedRect)) {
-    // console.log("Clicked ", clickedRect);
     _position.push(clickedRect);
   }
 
   _position = _position.sort();
 
-  // // console.log(position, "----------", _position);
 
   const _WIN = WIN.slice();
 
   _WIN.some((winH) => {
     let _winH = winH.slice();
     let hypothesis;
-    // // console.log("Position= ",position);
+
     if (_position.length > 3) {
       hypothesis = divideThemInChunks(_position);
     } else if (_position.length === 3) {
       hypothesis = _.chunk(_position, 3);
     } else {
-      // // console.log(xPosition === position);
       return false;
     }
 
@@ -617,7 +579,6 @@ function areWeDoneHere(position, clickedRect) {
     });
 
     hypothesis.some((hy) => {
-      // // console.log("Difference between", winH, " and ", hy, "is = ",_.difference(winH, hy).length);
       gameStatus = _
         .difference(hy, _winH)
         .length == 0 ?
@@ -644,7 +605,6 @@ function divideThemInChunks(collection) {
     chunks.push(temp);
   });
 
-  // // console.log("Chunks are = ", chunks);
 
   return _.uniq(chunks);
 }
