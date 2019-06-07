@@ -48,7 +48,7 @@
 
     <div class="fragment">
         <div class="fragmentContent">
-            <p>I believe you like Tic-Tac-Toe. </p>
+            <p>Wanna give it a try?. </p>
             <p>Let's play ‎🎉</p>
 
             <button class='onePlayer'>① Player</button>
