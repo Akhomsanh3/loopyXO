@@ -51,8 +51,8 @@
             <p>Wanna give it a try?. </p>
             <p>Let's play ‎🎉</p>
 
-            <button class='onePlayer'>I Player</button>
-            <button class='twoPlayer'>II Player</button>
+            <button class='onePlayer'>Player vs AI</button>
+            <button class='twoPlayer'>II Players</button>
         </div>
     </div>
 
