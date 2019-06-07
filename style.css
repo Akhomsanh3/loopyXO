@@ -68,7 +68,7 @@ h2>a {
 }
 
 .oScore {
-  color: #FFC107;
+  color: #87CEEB;
   font-weight: normal;
 }
 
@@ -130,7 +130,7 @@ h2>a {
   align-items: center;
   text-align: center;
   flex-direction: column;
-  background: #efefef;
+  background: #2F4F4F;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -141,7 +141,7 @@ h2>a {
 
 .fragment button {
   border: none;
-  background: #FFC107;
+  background: #696969;
   padding: 5% 0%;
   margin-bottom: 5%;
   box-shadow: 0px 0px 6px 0px #000000;
