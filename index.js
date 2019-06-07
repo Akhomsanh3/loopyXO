@@ -41,7 +41,7 @@ const c = new fabric.Canvas('canvas', {
 });
 
 const boardProps = {
-  stroke: '#00bcd4',
+  stroke: '#2F4F4F',
   fill: '',
   strokeWidth: 1,
   selectable: false
