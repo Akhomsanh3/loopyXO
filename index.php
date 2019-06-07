@@ -8,7 +8,7 @@
     <title>Loopy X &amp; O</title>
     <meta name='description' content='A Tic-Tac-Toe game with a timer and an infinite loop'>
     <link rel='stylesheet' href='style.css'>
-    <meta name='theme-color' content='#00BCD4'>
+    <meta name='theme-color' content='#2F4F4F'>
     <link rel='manifest' href='./manifest.json'>
     <!--Meta elements taken from notwaldorf's doodle-->
     <!--https://github.com/notwaldorf/doodle-->
@@ -25,7 +25,7 @@
     <link rel='apple-touch-icon' sizes='192x192' href='./images/icon-192x192.png'>
     <!-- Tile icon for Windows 8 (144x144 + tile color) -->
     <meta name='msapplication-TileImage' content='./images/icon-192x192.png'>
-    <meta name='msapplication-TileColor' content='#00BCD4'>
+    <meta name='msapplication-TileColor' content='#2F4F4F'>
     <meta name='msapplication-tap-highlight' content='no'>
     <link rel="stylesheet" href="raleway.css" async>
     <link rel="stylesheet" href="snackbarlight.min.css" async>
@@ -51,8 +51,8 @@
             <p>Wanna give it a try?. </p>
             <p>Let's play ‎🎉</p>
 
-            <button class='onePlayer'>① Player</button>
-            <button class='twoPlayer'>② Player</button>
+            <button class='onePlayer'>I Player</button>
+            <button class='twoPlayer'>II Player</button>
         </div>
     </div>
 
