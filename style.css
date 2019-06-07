@@ -135,7 +135,7 @@ h2>a {
   align-items: center;
   text-align: center;
   padding: 10% 5%;
-  box-shadow: 0px 0px 6px 0px #000000;
+  box-shadow: 0px 0px 6px 0px #eae5e5;
   outline: 5px solid #00bcd4;
 }
 
@@ -144,15 +144,15 @@ h2>a {
   background: #696969;
   padding: 5% 0%;
   margin-bottom: 5%;
-  box-shadow: 0px 0px 6px 0px #000000;
+  box-shadow: 0px 0px 6px 0px #eae5e5;
   width: 100%;
   font-size: calc(100*1.5%);
   transition: box-shadow 0.4s ease, background 0.4s ease;
 }
 
 .fragment button:active {
-  box-shadow: 0px 2px 8px 0px #000000;
-  background: #FFE082
+  box-shadow: 0px 2px 8px 0px #eae5e5;
+  background: #4169E1
 }
 
 .fragmentContent p:first-child {
