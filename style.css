@@ -28,7 +28,7 @@ h2>a {
 #progress {
   width: 100%;
   flex: 0.5;
-  border-bottom: 5px solid #FFC107;
+  border-bottom: 5px solid #00ba50;
   /*animation: reduced 7s ease-in-out infinite;*/
 }
 
@@ -136,7 +136,7 @@ h2>a {
   text-align: center;
   padding: 10% 5%;
   box-shadow: 0px 0px 6px 0px #eae5e5;
-  outline: 5px solid #00bcd4;
+  outline: 5px solid #00ba50;
 }
 
 .fragment button {
